@@ -1,0 +1,18 @@
+name: My Self Hosted Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-runner:
+    runs-on: self-hosted
+
+    steps:
+      - name: Print Computer Name
+        run: hostname
+
+      - name: Print Current User
+        run: whoami
+
+      - name: Print Current Directory
+        run: pwd
