@@ -1,0 +1,17 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-build:
+    uses: ./.github/workflows/reusable-build.yml
+
+    with:
+      app_name: payment-service
+      environment: dev
+
+    secrets:
+      TOKEN: ${{ secrets.GITHUB_TOKEN }}

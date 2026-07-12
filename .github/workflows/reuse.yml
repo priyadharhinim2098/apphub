@@ -1,0 +1,42 @@
+name: Reusable Build Workflow
+
+on:
+  workflow_call:
+    inputs:
+      app_name:
+        description: "Application name"
+        required: true
+        type: string
+
+      environment:
+        description: "Deployment environment"
+        required: true
+        type: string
+
+    secrets:
+      TOKEN:
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Print Inputs
+        run: |
+          echo "Application: ${{ inputs.app_name }}"
+          echo "Environment: ${{ inputs.environment }}"
+
+      - name: Authenticate
+        run: |
+          echo "Using GitHub Token"
+          echo "${{ secrets.TOKEN }}" | wc -c
+
+      - name: Build
+        run: |
+          echo "Building application..."
+          sleep 5
+          echo "Build Successful"
